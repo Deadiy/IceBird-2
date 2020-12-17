@@ -50,24 +50,29 @@ public class GameHandler : MonoBehaviour
 
         switch (gscore)
         {
-            case 10:
-                //Debug.Log("Debug");
-                break;
-            case 80:
+            case 5:
                 Debug.Log("Increased Speed");
                 spawner.move_speed = 2;
                 break;
-            case 100:
+            case 10:
                 Debug.Log("Increased Speed");
                 spawner.move_speed = 2.5f;
                 break;
-            case 120:
+            case 20:
                 Debug.Log("Increased Speed");
                 spawner.move_speed = 3;
                 break;
-            case 200:
+            case 30:
                 Debug.Log("Increased Speed");
                 spawner.move_speed = 3.5f;
+                break;
+            case 40:
+                Debug.Log("Increased Speed");
+                spawner.move_speed = 4f;
+                break;
+            case 100:
+                Debug.Log("Increased Speed");
+                spawner.move_speed = 5f;
                 break;
             default:
                 break;

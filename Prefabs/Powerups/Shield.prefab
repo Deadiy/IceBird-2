@@ -191,7 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammo_points: 0
   type: shield
-  effect_time: 20
+  effect_time: 15
 --- !u!114 &7621309730005014654
 MonoBehaviour:
   m_ObjectHideFlags: 0
