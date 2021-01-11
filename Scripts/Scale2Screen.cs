@@ -1,20 +1,40 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Scale2Screen : MonoBehaviour
 {
-    public float offset_x, offset_y;
+    [SerializeField] private GameHandler handler;
+    public Vector2 modifier;
+    public float offset;
+
+    Vector3 CameraPosition;
+    Vector3 LastPosition;
+    float textureUnitSize;
+
+    void Start()
+    {
+        CameraPosition = Camera.main.transform.position;
+        LastPosition = CameraPosition;
+
+        Sprite sprt = GetComponent<SpriteRenderer>().sprite;
+        Texture2D texture = sprt.texture;
+        textureUnitSize = texture.width / sprt.pixelsPerUnit;
+    }
     void FixedUpdate()
     {
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        if (sr == null) return;
+        transform.position += new Vector3(handler.spawner.move_speed * (-modifier.x), modifier.y);
+        LastPosition = CameraPosition;
+        Endless();
+    }
 
-        transform.localScale = new Vector3(1, 1, 1);
-
-        float width = sr.sprite.bounds.size.x - offset_x;
-        float height = sr.sprite.bounds.size.y - offset_y;
-
-        transform.localScale = new Vector2(Screen.width / width, Screen.height / height);
+    private void Endless()
+    {
+        if(CameraPosition.x - transform.position.x >= textureUnitSize)
+        {
+            float offsetPosition = (CameraPosition.x - transform.position.x) % textureUnitSize;
+            transform.position = new Vector3(CameraPosition.x + offsetPosition + offset, transform.position.y);
+        }
     }
 }

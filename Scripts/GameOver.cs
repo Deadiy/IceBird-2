@@ -5,10 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GameOver : MonoBehaviour
 {
+    public Scale2Screen background;
     public Text points, highscore, points_old, highscore_old, shieldTime,rockets;
     private Animator m_Animator;
     void Start()
     {
+
         m_Animator = gameObject.GetComponent<Animator>();
         m_Animator.SetTrigger("Pop Up");
         points.text = points_old.text;
@@ -17,5 +19,6 @@ public class GameOver : MonoBehaviour
         highscore_old.gameObject.SetActive(false);
         shieldTime.gameObject.SetActive(false);
         rockets.gameObject.SetActive(false);
+        Destroy(background);
     }
 }

@@ -1642,7 +1642,7 @@ Transform:
   m_GameObject: {fileID: 903941922}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.16, y: 8, z: 1}
+  m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 470453523}
   m_RootOrder: 4
@@ -1684,16 +1684,16 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 532137101
-  m_SortingLayer: 0
+  m_SortingLayerID: 13556275
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a455637f5be975e49b0c0ceeb084b237, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 5, y: 5}
-  m_AdaptiveModeThreshold: 0.5
+  m_DrawMode: 2
+  m_Size: {x: 500, y: 88}
+  m_AdaptiveModeThreshold: 0.398
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
@@ -1705,13 +1705,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 903941922}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 970e8855d60325f4db21f2b66b6a26fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset_x: -65.79
-  offset_y: -17
+  handler: {fileID: 790721385}
+  modifier: {x: 0.2, y: 0}
+  offset: 71.5
 --- !u!1 &935038618
 GameObject:
   m_ObjectHideFlags: 0
@@ -2029,7 +2030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b291977560e7d9b4382ce4103ea5fae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 0
+  debug: 1
   points: 9999
   jumpForce: 15
   rocketCount: 10
@@ -2540,7 +2541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1974514095988399530, guid: ef98fef2dd842354aaa71284cf294144, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1974514095988399531, guid: ef98fef2dd842354aaa71284cf294144, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2642,6 +2643,10 @@ PrefabInstance:
       propertyPath: rockets
       value: 
       objectReference: {fileID: 1645329969}
+    - target: {fileID: 1974514095988399532, guid: ef98fef2dd842354aaa71284cf294144, type: 3}
+      propertyPath: background
+      value: 
+      objectReference: {fileID: 903941925}
     - target: {fileID: 4464070881658707730, guid: ef98fef2dd842354aaa71284cf294144, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
