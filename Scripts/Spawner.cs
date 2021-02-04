@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 public class Spawner : MonoBehaviour
 {
     public Vector2 x_range, y_range;
-    public int childs;
     public float spawnrate,move_speed = 1;
     public GameHandler handler;
     public GameObject miniboss;
@@ -18,37 +17,39 @@ public class Spawner : MonoBehaviour
 
     private float difficulty = 0;
 
-    void Start()
-    {
-        
-    }
-    void Update()
-    {
-        childs = transform.childCount;
 
+    void FixedUpdate()
+    {
         Spawn();
     }
 
     private void Spawn()
     {  
-        StartCoroutine(Create(Random.Range(1,10),difficulty));
+        StartCoroutine(Create(spawnrate));
        
     }
-    IEnumerator Create(float rate, float count)
+    IEnumerator Create(float rate)
     {
-       
-        if (transform.childCount < difficulty || transform.childCount <= 0)
+        while (true)
         {
-            GameObject a = Instantiate(RandomSpawn());
-            a.transform.SetParent(transform);
-            Vector3 newposition = CheckPosition(rate);
-            a.transform.position = newposition;
-            //a.GetComponent<ConstantForce2D>().force = new Vector2(-move_speed, 0f);
-            a.GetComponent<Rigidbody2D>().velocity = Vector2.left * (a.GetComponent<Radious_handler>().move_speed * move_speed);
+
+            if (transform.childCount < Mathf.Ceil(difficulty) || transform.childCount <= 0)
+            {
+                GameObject a = Instantiate(RandomSpawn());
+                a.transform.SetParent(transform);
+                Vector3 newposition = CheckPosition(rate);
+                a.transform.position = newposition;
+                //a.GetComponent<ConstantForce2D>().force = new Vector2(-move_speed, 0f);
+                a.GetComponent<Rigidbody2D>().velocity = Vector2.left * (a.GetComponent<Radious_handler>().move_speed * move_speed);
+            }
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).transform.GetComponent<Rigidbody2D>().velocity = Vector2.left * (transform.GetChild(i).transform.GetComponent<Radious_handler>().move_speed * move_speed);
+            } 
+            if (difficulty <= 10) difficulty += Time.deltaTime * 0.05f;
+            yield return new WaitForSeconds(rate);
+        
         }
-        yield return new WaitForSeconds(rate);
-        if (difficulty <= 10) difficulty += Time.deltaTime * 0.05f;
-        Create(spawnrate, difficulty);
     }
 
     private Vector3 CheckPosition(float rate)

@@ -31,26 +31,5 @@ public class Radious_handler : MonoBehaviour
             Destroy(gameObject);
         }
 
-
-
-        //Debug.Log("Crash");
-        //if (collision.tag == "KillZone"|| collision.tag == "PowerUp")
-        //{
-        //    int target = Random.Range(0, 200);
-        //    switch (target%2)
-        //    {
-        //        case 0:
-        //            {
-        //                Destroy(gameObject);
-        //                break;
-        //            }
-        //        case 1:
-        //            {
-        //                Destroy(other);
-        //                break;
-        //            }
-        //    }
-           
-        //}
         }
     }

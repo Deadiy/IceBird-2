@@ -1610,6 +1610,7 @@ MonoBehaviour:
   highscore: {fileID: 1673017466}
   rockets: {fileID: 1645329969}
   shieldTime: {fileID: 9561482}
+  player: {fileID: 1342110077}
   gameOver: {fileID: 2068921212}
   jump_btn: {fileID: 352490840}
   shoot_btn: {fileID: 370214775}
@@ -1986,7 +1987,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -2030,15 +2031,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b291977560e7d9b4382ce4103ea5fae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
   points: 9999
-  jumpForce: 15
   rocketCount: 10
   gameHandler: {fileID: 790721383}
   rocketPrefab: {fileID: 1605975253520680828, guid: 4d4c63ba31dbb2c40ba163c43b8df9d3, type: 3}
   spawner: {fileID: 1646623962}
   jump: {fileID: 352490842}
   score: 0
+  jumpForce: 15
 --- !u!1 &1525315285
 GameObject:
   m_ObjectHideFlags: 0
@@ -2228,7 +2229,7 @@ GameObject:
   - component: {fileID: 1646623961}
   - component: {fileID: 1646623962}
   m_Layer: 0
-  m_Name: Things
+  m_Name: Spawner
   m_TagString: Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2262,8 +2263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x_range: {x: 100, y: 100}
   y_range: {x: -37, y: 37}
-  childs: 0
-  spawnrate: 5
+  spawnrate: 1
   move_speed: 1
   handler: {fileID: 790721385}
   miniboss: {fileID: 1605975253520680828, guid: 4690a55963364a24ea44468205877266, type: 3}
@@ -2345,7 +2345,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'HighScore:'
+  m_Text: ' HighScore:'
 --- !u!222 &1673017467
 CanvasRenderer:
   m_ObjectHideFlags: 0

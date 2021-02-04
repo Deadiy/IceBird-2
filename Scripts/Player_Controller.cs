@@ -7,18 +7,22 @@ using UnityEngine.UI;
 public class Player_Controller : MonoBehaviour
 {
     public bool debug = false;
-    public int points,jumpForce, rocketCount;
+    public int points, rocketCount;
     public GameObject gameHandler, rocketPrefab;
     public Spawner spawner;
     public Button jump; 
-    public float score;
+    public float score, jumpForce;
+
+
+    [NonSerialized]
+    public float gravity;
 
     private Animator m_Animator;
     private Rigidbody2D birdRB2D;
-    // Start is called before the first frame update
     void Awake()
     {
         birdRB2D = GetComponent<Rigidbody2D>();
+        gravity = 15f;
         points = 0;
         if (debug == true)
         {
@@ -26,31 +30,46 @@ public class Player_Controller : MonoBehaviour
             birdRB2D.bodyType = RigidbodyType2D.Static;
         }
         m_Animator = gameObject.GetComponent<Animator>();
+        StartCoroutine(Gravity(1));
     }
+
     private void Update()
     {
-        
+
         if (jump.GetComponent<ButtonStay>().buttonPressed == true && gameHandler.GetComponent<GameHandler>().touchControls == true)
         {
             Jump();
         }
-         else if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && gameHandler.GetComponent<GameHandler>().touchControls == false)
+        else if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && gameHandler.GetComponent<GameHandler>().touchControls == false)
         {
             Jump();
-        }else m_Animator.ResetTrigger("Jump");
+        }
+        else m_Animator.ResetTrigger("Jump");
         if ((Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl)) && gameHandler.GetComponent<GameHandler>().touchControls == false)
         {
             Shoot();
         }
+
+    }
+
+    private IEnumerator Gravity(int rate)
+    {
+        while (true)
+        {
+            jumpForce = gravity;
+            Debug.Log("Gravity Check!");
+            yield return new WaitForSeconds(rate);
+        }
         
+       
     }
     void FixedUpdate()
     {       
         score = (points++ + Time.deltaTime) * 0.01f;
-        if (birdRB2D.gravityScale < 8)
-        {
-            birdRB2D.gravityScale += (score * 0.5f) * (Time.fixedDeltaTime * 0.001f);
-        }
+        //if (birdRB2D.gravityScale < 8)
+        //{
+        //    birdRB2D.gravityScale += (score * 0.5f) * (Time.fixedDeltaTime * 0.001f);
+        //}
         gameHandler.GetComponent<GameHandler>().UpdateUI(score, transform.GetChild(0).GetComponent<Shield_Behaviour>().effect , rocketCount);
     }
 

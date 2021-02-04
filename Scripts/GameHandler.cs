@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ public class GameHandler : MonoBehaviour
     public int gscore;
     public Text points, highscore, rockets, shieldTime;
 
+    public Player_Controller player;
     public GameOver gameOver;
     public GameObject jump_btn,shoot_btn;
     public Spawner spawner;
@@ -30,7 +32,8 @@ public class GameHandler : MonoBehaviour
         }
         gameOver.gameObject.SetActive(false);
         highScore = PlayerPrefs.GetInt("highscore");
-        highscore.text = "HighScore: " + highScore.ToString();
+        highscore.text = " HighScore: " + highScore.ToString();
+        StartCoroutine(DifficultySpikes());
     }
 
     public void UpdateUI(float score,float shield_time , int rocketcount)
@@ -45,39 +48,50 @@ public class GameHandler : MonoBehaviour
         }
         else shieldTime.gameObject.SetActive(false);
     }
-    private void FixedUpdate()
-    {
 
-        switch (gscore)
+    private IEnumerator DifficultySpikes()
+    {
+        while (true)
         {
-            case 5:
-                Debug.Log("Increased Speed");
-                spawner.move_speed = 2;
-                break;
-            case 10:
-                Debug.Log("Increased Speed");
-                spawner.move_speed = 2.5f;
-                break;
-            case 20:
-                Debug.Log("Increased Speed");
-                spawner.move_speed = 3;
-                break;
-            case 30:
-                Debug.Log("Increased Speed");
-                spawner.move_speed = 3.5f;
-                break;
-            case 40:
-                Debug.Log("Increased Speed");
-                spawner.move_speed = 4f;
-                break;
-            case 100:
-                Debug.Log("Increased Speed");
-                spawner.move_speed = 5f;
-                break;
-            default:
-                break;
+            switch (gscore)
+            {
+                case 5:
+                    Snappy(2);
+                    break;
+                case 10:
+                    Snappy(2.5f);
+                    break;
+                case 20:
+                    Snappy(3);
+                    break;
+                case 30:
+                    Snappy(3.5f);
+                    break;
+                case 40:
+                    Snappy(4);
+                    break;
+                case 100:
+                    Snappy(5);
+                    break;
+                default:
+                    break;
+            }
+            Debug.Log("Checked Score");
+        yield return new WaitForSeconds(0.25f);
         }
     }
+
+    private void Snappy(float modifier)
+    {
+        spawner.move_speed = modifier;
+        if (player.gravity > 2f)
+        {
+            player.gravity = player.gravity - (modifier * 0.0025f);
+        }
+            
+        
+    }
+
     public void GameOver(float score)
     {
         if (highScore <= score)
