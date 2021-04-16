@@ -96,7 +96,7 @@ public class Player_Controller : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((collision.tag == "KillZone" && transform.GetChild(0).gameObject.activeSelf != true || collision.tag == "DeadZone"))
+        if (collision.tag == "KillZone" && transform.GetChild(0).gameObject.activeSelf != true || collision.tag == "DeadZone" || collision.tag == "MiniBoss")
         {
             gameHandler.GetComponent<GameHandler>().GameOver(score);
             points = 0;
